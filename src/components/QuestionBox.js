@@ -20,13 +20,14 @@ export const QuestionBox = () => {
 				!li.textContent.includes(index) && (li.firstChild.style.background = '#fff')
 			}
 
-			setDisabled(true)
+			setDisabled(false)
 		},
 		chooseAnswer = () => {
 			if (num <= 11) {
 				setAnswers([...answers, selected.current])
 				setNum(num + 1)
 				setProgress(progress + 10)
+				console.log(answers)
 			}
 		}
 
@@ -47,7 +48,7 @@ export const QuestionBox = () => {
 					key={props.index}
 					onClick={() => {
 						selectAnswer(props.choice, props.index)
-						setDisabled(false)
+					
 					}}
 				>
 					<b>{props.index}。</b>

@@ -17,7 +17,7 @@ function App() {
 		<>
 			<div className='container'>
 				<div className='box'>
-				<answersContext.Provider value={{answers, setAnswers}}>
+					<answersContext.Provider value={{ answers, setAnswers }}>
 						{(answers.length <= 9) ? <QuestionBox /> : <ResultBox />}
 					</answersContext.Provider>
 				</div>

@@ -1,91 +1,131 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useEffect } from 'react'
 import { FaCheck } from 'react-icons/fa'
 import { ImCross } from 'react-icons/im'
 import { answersContext } from '../App'
 import { Accordion } from '@mantine/core'
 
 export const ResultBox = () => {
-	const { answers, setAnswers } = useContext(answersContext)
-	const mark = useRef(0)
-	/*answers = [
+	const { answers, setAnswers } = useContext(answersContext),
+		mark = useRef(0),
+		answersSample = [
 			{
-				question: 'きょうの＿バン＿ごはんはおべんとうにします。',
-				choices: ['晩', '夜', '朝', '昼'],
-				answer: '晩',
+				question: '８２円の＿切手＿を１０まいください。',
+				choice: ['きりて', 'ぎって', 'きいて', 'きって'],
+				answer: 'きって',
+				answered: 'きって',
+			},
+			{
+				question: 'チーズの＿うしろ＿に牛乳があります。',
+				choice: ['線ろ', '前ろ', '皆', '後ろ'],
+				answer: '後ろ',
+				answered: '後ろ',
 			},
 			{
 				question: '5さい下の＿弟＿は とても かわいいです。',
-				choices: ['おとと', 'おととう', 'おっととう', 'おとうと'],
+				choice: ['おとと', 'おととう', 'おっととう', 'おとうと'],
 				answer: 'おとうと',
-			},
-			{
-				question: '＿今夜＿友だちとレストランに行きます。',
-				choices: ['こんよ', 'こんばん', 'こんや', 'こんよる'],
-				answer: 'こんや',
-			},
-			{
-				question: 'にわで いろいろな花 を＿育て＿ています。',
-				choices: ['たて', 'かて', 'そだて', 'まいて'],
-				answer: 'そだて',
-			},
-			{
-				question: 'ハガキは どこで＿売って＿いますか。',
-				choices: ['はって', 'つくって', 'かって', 'うって'],
-				answer: 'うって',
-			},
-			{
-				question: 'きょう しごとは 何時に＿おわり＿ますか。',
-				choices: ['売まり', '了わり', '止わり', '終わり'],
-				answer: 'おわり',
-			},
-			{
-				question: 'えきまえの＿店＿で よく かいものします。',
-				choices: ['てん', 'や', 'みせ', 'たな'],
-				answer: 'みせ',
-			},
-			{
-				question: 'わたしは＿しろい＿ふくをよくかいます。',
-				choices: ['白い', '黄い', '黒い', '青い'],
-				answer: '白い',
-			},
-			{
-				question: 'きょうかしょのこの＿部分＿を コピーしてください。',
-				choices: ['べぶん', 'ぶべん', 'ぶぶん', 'べべん'],
-				answer: 'ぶぶん',
+				answered: 'おとうと',
 			},
 			{
 				question: '子どものとき花＿や＿に なりたかったです。',
-				choices: ['屋', '家', '店', '山'],
+				choice: ['屋', '家', '店', '山'],
 				answer: '屋',
+				answered: '山',
 			},
-		]*/
+			{
+				question: 'これは＿わたし＿が きのう わすれた かさです。',
+				choice: ['広', '私', '利', '業'],
+				answer: '私',
+				answered: '業',
+			},
+			{
+				question: 'わたしは＿しろい＿ふくをよくかいます。',
+				choice: ['白い', '黄い', '黒い', '青い'],
+				answer: '白い',
+				answered: '青い',
+			},
+			{
+				question: 'ここに＿住所＿を書いてください。',
+				choice: ['じゅうしょう', 'じゅうしょ', 'じゅしょう', 'じゅしょ'],
+				answer: 'じゅうしょ',
+				answered: 'じゅしょ',
+			},
+			{
+				question: '＿近所＿に ゆうめいな かしゅが すんでいます。',
+				choice: ['きんじょ', 'きんじょう', 'きんしょ', 'きんしょう'],
+				answer: 'きんじょ',
+				answered: 'きんしょう',
+			},
+			{
+				question: 'きょうかしょのこの＿部分＿を コピーしてください。',
+				choice: ['べぶん', 'ぶべん', 'ぶぶん', 'べべん'],
+				answer: 'ぶぶん',
+				answered: 'べべん',
+			},
+			{
+				question: 'もうすぐ コンサートが＿はじまり＿ます。',
+				choice: ['発まり', '初まり', '始まり', '開まり'],
+				answer: '始まり',
+				answered: '開まり',
+			},
+		]
 
-	answers.map(answer => {
-		answer.answered == answer.correctAnswer && mark.current++
+	answersSample.map(answer => {
+		answer.answered === answer.answer && mark.current++
 	})
+
+	useEffect(() => {
+		document.querySelectorAll('.resultsAnswer').forEach(item => {
+			item.querySelectorAll('li').forEach(li => {
+				answersSample.map(answerItem => {
+					// if (li.textContent === answerItem.answered) {
+					// 	li.classList = 'wrong'
+					// 	li.closest('.resultsSingleBox').querySelector('.resultsQuestion').innerHTML += '❌'
+					// }
+					// if (li.textContent === answerItem.answered && answerItem.answered == answerItem.answer) {
+					// 	li.classList = 'correct'
+					// 	li.closest('.resultsSingleBox').querySelector('.resultsQuestion').innerHTML += '✔️'
+					// } 
+					if(li.textContent === answerItem.answered){
+						li.classList = 'wrong'
+						li.closest('.resultsSingleBox').querySelector('.resultsQuestion li').classList = 'wrong'
+					}
+					if(li.textContent === answerItem.answered && li.textContent === answerItem.answer){
+						li.classList = 'correct'
+						li.closest('.resultsSingleBox').querySelector('.resultsQuestion li').classList = 'correct'
+					}
+					if(li.textContent === answerItem.answer){
+						li.classList = 'correct'
+					}
+				})
+			})
+		})
+	}, [])
 
 	//components
 	const ResultsAnswer = props => {
 		return (
-			<Accordion multiple iconPosition='right' styles={{ label: { fontSize: 'calc(0.7vw + 0.7rem)' } }}>
-				<Accordion.Item
-					label={
-						<div className='resultsQuestion'>
-							<li>{props.value.questions}</li>
+			<div className='resultsSingleBox'>
+				<Accordion multiple iconPosition='right' styles={{ label: { fontSize: 'calc(0.7vw + 0.7rem)' } }}>
+					<Accordion.Item
+						label={
+							<div className='resultsQuestion'>
+								<li>{props.value.question}</li>
+							</div>
+						}
+					>
+						<div className='resultsAnswer'>
+							<ol>
+								{props.value.choice.map((answer, index) => (
+									<li key={index}>
+										<span>{answer}</span>
+									</li>
+								))}
+							</ol>
 						</div>
-					}
-				>
-					<div className='resultsAnswer'>
-						<ol>
-							{props.value.choices.map((answer, index) => (
-								<li key={index}>
-									<span>{answer}</span>
-								</li>
-							))}
-						</ol>
-					</div>
-				</Accordion.Item>
-			</Accordion>
+					</Accordion.Item>
+				</Accordion>
+			</div>
 		)
 	}
 
@@ -95,7 +135,7 @@ export const ResultBox = () => {
 				<div>Name</div>
 				<div className='percent'>
 					<div>
-						{mark.current > answers.length ? answers.length : mark.current} / {answers.length}
+						{mark.current > answersSample.length ? answersSample.length : mark.current} / {answersSample.length}
 					</div>
 					<div>
 						<FaCheck />
@@ -103,7 +143,7 @@ export const ResultBox = () => {
 				</div>
 			</div>
 			<ol className='resultsWrapper'>
-				{answers.map((value, index) => (
+				{answersSample.map((value, index) => (
 					<ResultsAnswer value={value} index={index} key={index} />
 				))}
 			</ol>

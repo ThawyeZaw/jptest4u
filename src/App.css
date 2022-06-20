@@ -215,6 +215,15 @@
 	float: right;
 }
 
+.correct::after{
+	content: '✔️';
+	color: #0f0;
+}
+.wrong::after{
+	content: '❌';
+	color: #f00;
+}
+
 .resultsWrapper > div {
 	border-bottom: 2px solid #000;
 }
