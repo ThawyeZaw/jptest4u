@@ -13,13 +13,11 @@ export const QuestionBox = () => {
 
 	// functions
 	const selectAnswer = (ans, index) => {
-			selected.current = { question: questions[num - 1].question, choice: questions[num - 1].choices, answer: questions[num - 1].answer, answered: ans }
-
 			for (let li of document.querySelectorAll('li')) {
 				li.textContent.includes(index) && (li.firstChild.style.background = '#999')
 				!li.textContent.includes(index) && (li.firstChild.style.background = '#fff')
 			}
-
+			selected.current = { question: questions[num - 1].question, choice: questions[num - 1].choices, answer: questions[num - 1].answer, answered: ans }
 			setDisabled(false)
 		},
 		chooseAnswer = () => {
@@ -48,7 +46,6 @@ export const QuestionBox = () => {
 					key={props.index}
 					onClick={() => {
 						selectAnswer(props.choice, props.index)
-					
 					}}
 				>
 					<b>{props.index}。</b>
@@ -83,7 +80,7 @@ export const QuestionBox = () => {
 				</button>
 			</div>
 			<div className='progressBar'>
-				<div className='progress' style={{width: `${progress}%`}}></div>
+				<div className='progress' style={{ width: `${progress}%` }}></div>
 			</div>
 		</div>
 	)
